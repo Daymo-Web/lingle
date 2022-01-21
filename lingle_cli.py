@@ -85,7 +85,7 @@ def guess(key, lst):
 
 def all_words(length):
     lst = set()
-    lst_file = open("scrabble.txt")
+    lst_file = open("dictionaries/scrabble.txt")
     for word in lst_file:
         word = word[:-1].lower()
         if len(word) == length and word.isalpha():
@@ -94,7 +94,7 @@ def all_words(length):
 
 
 if __name__ == '__main__':
-    word_file = open("words.txt")
+    word_file = open("dictionaries/words.txt")
     word_set = set()
 
     word_length = int(input("Length of word: "))
