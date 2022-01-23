@@ -16,6 +16,7 @@ function App() {
   const [valid, setValid] = useState(false);
   const [cnt, setCnt] = useState(0);
   const [guesses, setGuesses] = useState([]);
+  const [correct, setCorrect] = useState(false);
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
@@ -96,6 +97,10 @@ function App() {
       setGuesses([...guesses, word]);
     }
     setCnt(cnt + 1);
+    if (str == answer) {
+      setCorrect(true);
+      console.log("Correct!!!!!!!");
+    }
     const isValid = checkWords(str);
     console.log("isValid", isValid);
     if (isValid) {
@@ -131,6 +136,13 @@ function App() {
             <div className="game-header">
               <p>Okay let's start this mofo</p>
             </div>
+            {correct ? (
+              <div>
+                <h1>You Win!</h1>
+              </div>
+            ) : (
+              <div></div>
+            )}
             {cnt > 0 ? (
               <div>
                 <SquareGuesses />
