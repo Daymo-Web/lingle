@@ -7,11 +7,25 @@
 }
 .game-body {
   flex: 4;
+  flex-direction: column;
 }
 
 .cross-board-input {
   width: 50px;
   height: 50px;
+}
+
+.square {
+  float: left;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  background-color: grey;
+}
+
+.text {
+  margin: auto;
+  font-size: 30px;
 }
 
 /* .App-logo {
