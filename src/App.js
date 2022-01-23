@@ -325,7 +325,7 @@ function App() {
   return (
     <div className="App">
       <div>
-        <p>Wordle :D</p>
+        <h1>Wordle</h1>
       </div>
       <div>
         {length > 0 ? (
@@ -352,7 +352,7 @@ function App() {
               {submitButton === true && debug === true ? (
                 <div>
                   <button onClick={updateWord}>submit now</button>
-                  <p>Hey! That is not a valid word! Try again :(</p>
+                  <h3>Hey! That is not a valid word! Try again :(</h3>
                 </div>
               ) : submitButton === true ? (
                 <button onClick={updateWord}>submit now</button>
@@ -363,7 +363,7 @@ function App() {
           </div>
         ) : playing === true ? (
           <div>
-            <p>What length do you want your jingle word to be?</p>
+            <h2>Select Lingle word length: </h2>
             <form>
               <input
                 type="number"

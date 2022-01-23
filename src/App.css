@@ -10,6 +10,20 @@
   flex-direction: column;
 }
 
+h1 {
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 58px;
+}
+
+h2, h3 {
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 40px;
+}
+
 .cross-board-input {
   width: 75px;
   height: 75px;
@@ -113,10 +127,12 @@
 
 .inline-block-child {
   display: inline-block;
+  border-radius: 22px;
   width: 75px;
   height: 75px;
-  font-size: 48px;
-  font-family: "Courier New", Courier, monospace;
+  font-size: 58px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
 
@@ -131,4 +147,8 @@ ul {
   border-color: black;
   /* padding: 0; Remove padding */
   /* margin: 0; Remove margins */
+}
+
+html { 
+  background: url(cooly.jpeg) no-repeat center center fixed; 
 }
