@@ -104,3 +104,19 @@
 
   z-index: 1;
 }
+.square-guesses {
+  border-radius: 2px;
+  border-color: black;
+}
+li {
+}
+ul {
+  padding-left: 6%;
+  letter-spacing: 50px;
+  list-style-type: none; /* Remove bullets */
+  border: solid;
+  border-radius: 0px;
+  border-color: black;
+  /* padding: 0; Remove padding */
+  /* margin: 0; Remove margins */
+}

@@ -144,7 +144,7 @@ function App() {
               <div></div>
             )}
             {cnt > 0 ? (
-              <div>
+              <div className="square-guesses">
                 <SquareGuesses />
               </div>
             ) : (
