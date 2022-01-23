@@ -9,35 +9,41 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [wordLengthInput, setWordLengthInput] = useState(0);
   const [length, setLength] = useState(0);
+  const [letter, setLetter] = useState("");
+  const [word, setWord] = useState("");
+  const [submitButton, setSubmitButton] = useState(false);
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
 
     // Check if they hit the max character length
-    console.log("value.length", value.length);
-    if (value.length === maxLength) {
-      // Check if it's not the last input field
-      const form = e.target.form;
-      const index = [...form].indexOf(e.target);
-      form.elements[index + 1].focus();
-      e.preventDefault();
+    // Check if it's not the last input field
+    setLetter(value);
+    setWord(word + letter);
+    console.log(word);
+    const form = e.target.form;
+    const index = [...form].indexOf(e.target);
+    if (index === length - 1) {
+      return;
     }
+    form.elements[index + 1].focus();
+    e.preventDefault();
   };
   const crossBoard = (
     <div className="cross-board">
       <div>
         <form>
-          <tbody>
-            {Array.from({ length }, (_, k) => (
-              <input
-                type="text"
-                name="name"
-                maxLength={1}
-                onChange={handleChange}
-                placeholder="field 1"
-              ></input>
-            ))}
-          </tbody>
+          {Array.from({ length }, (_, k) => (
+            <input
+              className="cross-board-input"
+              type="text"
+              name="name"
+              key={k}
+              maxLength={1}
+              onChange={handleChange}
+              placeholder="field 1"
+            ></input>
+          ))}
         </form>
       </div>
     </div>
