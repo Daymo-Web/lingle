@@ -18,6 +18,7 @@ function App() {
   const [guesses, setGuesses] = useState([]);
   const [correct, setCorrect] = useState(false);
   const [wordHash, setWordHash] = useState({});
+  const [hashList, setHashList] = useState([]);
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
@@ -50,7 +51,6 @@ function App() {
               key={k}
               maxLength={1}
               onChange={handleChange}
-              placeholder="field 1"
             ></input>
           ))}
         </form>
@@ -118,10 +118,20 @@ function App() {
   // );
 
   const SquareGuesses = () => {
-    const listGuesses = guesses.map((wordd) => (
-      <li key={wordd.toString()}>{wordd}</li>
-    ));
-    return <ul>{listGuesses}</ul>;
+    let fullStr = [];
+    for (let i = 0; i < guesses.length; ++i) {
+      let currGuess = guesses[i];
+      fullStr.push(
+        <div>
+          <div class='parent'>
+            {Array.from({ length }, (_, k) => (
+              <div style={{"background-color": hashList[i][k][1]}} class='child inline-block-child'> {currGuess[k].toUpperCase()} </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+    return fullStr;
   };
 
   const checkWords = (word) => {
@@ -202,6 +212,9 @@ function App() {
       }
     }
     setWordHash(wordMap);
+    let hashy = hashList;
+    hashy.push(wordMap);
+    setHashList(hashy);
   };
 
   return (
