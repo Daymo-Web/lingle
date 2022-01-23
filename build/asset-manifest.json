@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Lingle/static/css/main.e524e3f5.css",
+    "main.js": "/Lingle/static/js/main.8211af6d.js",
+    "static/js/787.f90e7daf.chunk.js": "/Lingle/static/js/787.f90e7daf.chunk.js",
+    "static/media/cooly.jpeg": "/Lingle/static/media/cooly.674b7e0371f44e0826ec.jpeg",
+    "index.html": "/Lingle/index.html",
+    "main.e524e3f5.css.map": "/Lingle/static/css/main.e524e3f5.css.map",
+    "main.8211af6d.js.map": "/Lingle/static/js/main.8211af6d.js.map",
+    "787.f90e7daf.chunk.js.map": "/Lingle/static/js/787.f90e7daf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e524e3f5.css",
+    "static/js/main.8211af6d.js"
+  ]
+}
