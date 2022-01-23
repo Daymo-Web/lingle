@@ -14,6 +14,7 @@ function App() {
   const [submitButton, setSubmitButton] = useState(false);
   const [answer, setAnswer] = useState();
   const [valid, setValid] = useState(false);
+  const [debug, setDebug] = useState(false);
   const [cnt, setCnt] = useState(0);
   const [guesses, setGuesses] = useState([]);
   const [correct, setCorrect] = useState(false);
@@ -39,6 +40,44 @@ function App() {
       e.preventDefault();
     }
   };
+  const handleBackspace = (e) => {
+    const { maxLength, value, name } = e.target;
+    if (value.length === 0) {
+      const form = e.target.form;
+      const index = [...form].indexOf(e.target);
+      const newArray = Array.from(word);
+      newArray[index] = "";
+      setWord(newArray);
+      if (index !== 0) {
+        form.elements[index - 1].focus();
+      }
+
+      e.preventDefault();
+      console.log(index);
+    }
+  };
+  const handleLeft = (e) => {
+    const form = e.target.form;
+    const index = [...form].indexOf(e.target);
+
+    if (index !== 0) {
+      form.elements[index - 1].focus();
+    }
+
+    e.preventDefault();
+    console.log(index);
+  };
+  const handleRight = (e) => {
+    const form = e.target.form;
+    const index = [...form].indexOf(e.target);
+
+    if (index !== length - 1) {
+      form.elements[index + 1].focus();
+    }
+
+    e.preventDefault();
+    console.log(index);
+  };
   const crossBoard = (
     <div className="cross-board">
       <div>
@@ -49,8 +88,18 @@ function App() {
               type="text"
               name="name"
               key={k}
+              defaultValue={""}
               maxLength={1}
               onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  handleBackspace(e);
+                } else if (e.keyCode === 37) {
+                  handleLeft(e);
+                } else if (e.keyCode === 39) {
+                  handleRight(e);
+                }
+              }}
             ></input>
           ))}
         </form>
@@ -89,26 +138,30 @@ function App() {
 
   const updateWord = () => {
     const str = word.join("");
-    console.log(word);
-    console.log(str);
     setWordString(str);
-    if (guesses.length == 0) {
-      setGuesses([word]);
-    } else {
-      setGuesses([...guesses, word]);
-    }
-    setCnt(cnt + 1);
+
     if (str == answer) {
       setCorrect(true);
       console.log("Correct!!!!!!!");
     }
     const isValid = checkWords(str);
-    console.log("isValid", isValid);
     if (isValid) {
+      setDebug(false);
       backend(str);
-      console.log(wordMap);
-      console.log("Valid!");
+      if (guesses.length == 0) {
+        setGuesses([word]);
+      } else {
+        setGuesses([...guesses, word]);
+      }
+      setCnt(cnt + 1);
+    } else {
+      setDebug(true);
     }
+    // let newArray = Array.from(word);
+    // for (let i = 0; i < length; ++i) {
+    //   newArray[i] = "";
+    // }
+    // setWord(newArray);
   };
 
   // const allSqaures = (
@@ -123,13 +176,18 @@ function App() {
       let currGuess = guesses[i];
       fullStr.push(
         <div>
-          <div class='parent'>
+          <div className="parent">
             {Array.from({ length }, (_, k) => (
-              <div style={{"background-color": hashList[i][k][1]}} class='child inline-block-child'> {currGuess[k].toUpperCase()} </div>
+              <div
+                style={{ backgroundColor: hashList[i][k][1] }}
+                className="child inline-block-child"
+              >
+                {currGuess[k].toUpperCase()}
+              </div>
             ))}
           </div>
         </div>
-      )
+      );
     }
     return fullStr;
   };
@@ -139,15 +197,62 @@ function App() {
     return scrabble.includes(word.toUpperCase()) || words.includes(wordString);
   };
 
-
   let dictionary = {
-    a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0, j: 0, k: 0, l: 0, m: 0,
-    n: 0, o: 0, p: 0, q: 0, r: 0, s: 0, t: 0, u: 0, v: 0, w: 0, x: 0, y: 0, z: 0
+    a: 0,
+    b: 0,
+    c: 0,
+    d: 0,
+    e: 0,
+    f: 0,
+    g: 0,
+    h: 0,
+    i: 0,
+    j: 0,
+    k: 0,
+    l: 0,
+    m: 0,
+    n: 0,
+    o: 0,
+    p: 0,
+    q: 0,
+    r: 0,
+    s: 0,
+    t: 0,
+    u: 0,
+    v: 0,
+    w: 0,
+    x: 0,
+    y: 0,
+    z: 0,
   };
 
   let dictionary2 = {
-    a: [], b: [], c: [], d: [], e: [], f: [], g: [], h: [], i: [], j: [], k: [], l: [], m: [],
-    n: [], o: [], p: [], q: [], r: [], s: [], t: [], u: [], v: [], w: [], x: [], y: [], z: []
+    a: [],
+    b: [],
+    c: [],
+    d: [],
+    e: [],
+    f: [],
+    g: [],
+    h: [],
+    i: [],
+    j: [],
+    k: [],
+    l: [],
+    m: [],
+    n: [],
+    o: [],
+    p: [],
+    q: [],
+    r: [],
+    s: [],
+    t: [],
+    u: [],
+    v: [],
+    w: [],
+    x: [],
+    y: [],
+    z: [],
   };
 
   let wordMap = {};
@@ -162,7 +267,7 @@ function App() {
 
   const backend = (wordString) => {
     for (let i = 0; i < wordString.length; ++i) {
-      let idxStr = i.toString()
+      let idxStr = i.toString();
       wordMap[idxStr] = [wordString.charAt(i), ""];
     }
     console.log(wordMap);
@@ -244,7 +349,12 @@ function App() {
             )}
             <div className="game-body">
               <div>{crossBoard}</div>
-              {submitButton === true ? (
+              {submitButton === true && debug === true ? (
+                <div>
+                  <button onClick={updateWord}>submit now</button>
+                  <p>Hey! That is not a valid word! Try again :(</p>
+                </div>
+              ) : submitButton === true ? (
                 <button onClick={updateWord}>submit now</button>
               ) : (
                 <p></p>
@@ -263,11 +373,12 @@ function App() {
               <input
                 type="submit"
                 value="Submit"
-                onClick={() => {
+                onClick={(event) => {
                   setWordArray();
                   randomWord();
                   filterWords();
                   setLength(tmpLength);
+                  event.preventDefault();
                 }}
               />
             </form>
