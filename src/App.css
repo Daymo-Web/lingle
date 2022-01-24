@@ -12,14 +12,14 @@
 
 h1 {
   color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: serif;
   font-weight: bold;
   font-size: 58px;
 }
 
 h2, h3 {
   color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: serif;
   font-weight: bold;
   font-size: 40px;
 }
@@ -28,6 +28,20 @@ h2, h3 {
   width: 75px;
   height: 75px;
   font-size: 48px;
+  text-align: center;
+}
+
+.subbox {
+  width: 80px;
+  height: 32px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.numbox {
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
   text-align: center;
 }
 
@@ -40,7 +54,7 @@ h2, h3 {
 }
 
 .text {
-  margin: auto;
+  margin: center;
   font-size: 30px;
 }
 
@@ -132,8 +146,8 @@ h2, h3 {
   height: 75px;
   font-size: 58px;
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
+  font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+  font-weight: 550;
 }
 
 li {
@@ -150,5 +164,5 @@ ul {
 }
 
 html { 
-  background: url(cooly.jpeg) no-repeat center center fixed; 
+  background: url(cooly3.png) no-repeat center center fixed;
 }

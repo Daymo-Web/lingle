@@ -179,7 +179,7 @@ function App() {
           <div className="parent">
             {Array.from({ length }, (_, k) => (
               <div
-                style={{ backgroundColor: hashList[i][k][1] }}
+                style={{ backgroundColor: hashList[i][k] }}
                 className="child inline-block-child"
               >
                 {currGuess[k].toUpperCase()}
@@ -192,9 +192,8 @@ function App() {
     return fullStr;
   };
 
-  const checkWords = (word) => {
-    console.log(word);
-    return scrabble.includes(word.toUpperCase()) || words.includes(wordString);
+  const checkWords = (str) => {
+    return (scrabble.includes(str.toUpperCase()) || words.includes(str));
   };
 
   let dictionary = {
@@ -255,62 +254,52 @@ function App() {
     z: [],
   };
 
-  let wordMap = {};
-
-  const removeItemOnce = (arr, value) => {
-    var index = arr.indexOf(value);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    return arr;
-  };
+  let wordMap = [];
 
   const backend = (wordString) => {
     for (let i = 0; i < wordString.length; ++i) {
       let idxStr = i.toString();
-      wordMap[idxStr] = [wordString.charAt(i), ""];
+      wordMap.push("");
     }
-    console.log(wordMap);
     for (let i = 0; i < answer.length; ++i) {
-      dictionary[answer.charAt(i)] += 1;
+      ++dictionary[answer.charAt(i)];
     }
-    console.log(dictionary);
     let tmpDict = dictionary;
     for (let i = 0; i < wordString.length; ++i) {
-      console.log(wordString.charAt(i));
       dictionary2[wordString.charAt(i)].push(i);
     }
-    console.log(dictionary2);
     for (let i = 0; i < wordString.length; ++i) {
       let currLetter = wordString.charAt(i);
-      if (wordMap[i][1] == "") {
+      if (wordMap[i] == "") {
         if (tmpDict[currLetter] == 0) {
           for (let j = 0; j < dictionary2[currLetter].length; ++j) {
-            wordMap[dictionary2[currLetter][j]][1] = "grey";
+            wordMap[dictionary2[currLetter][j]] = "grey";
           }
         } else if (dictionary2[currLetter].length == 1) {
           if (currLetter == answer.charAt(i)) {
-            wordMap[i][1] = "green";
+            wordMap[i] = "green";
           } else {
-            wordMap[i][1] = "yellow";
+            wordMap[i] = "yellow";
           }
         } else {
-          console.log("multiple");
-          console.log(i);
           let tmpLst = dictionary2[currLetter];
-          for (let j = 0; j < tmpLst.length; ++j) {
-            if (currLetter == answer.charAt(j)) {
+          let tmpLst2 = tmpLst;
+          for (let j = 0; j < tmpLst2.length; ++j) {
+            let k = tmpLst2[j];
+            if (currLetter == answer.charAt(k)) {
               tmpDict[currLetter] -= 1;
-              tmpLst.removeItemOnce(j);
-              wordMap[i][1] = "green";
+              tmpLst = tmpLst.filter((i) => i !== k);
+              wordMap[k] = "green";
             }
           }
-          for (let j = 0; j < tmpLst.length; ++j) {
+          tmpLst2 = tmpLst;
+          for (let j = 0; j < tmpLst2.length; ++j) {
+            let k = tmpLst[j];
             if (tmpDict[currLetter] <= 0) {
-              wordMap[i][1] = "grey";
+              wordMap[k] = "grey";
             } else {
               tmpDict[currLetter] -= 1;
-              wordMap[i][1] = "yellow";
+              wordMap[k] = "yellow";
             }
           }
         }
@@ -325,14 +314,11 @@ function App() {
   return (
     <div className="App">
       <div>
-        <h1>Wordle</h1>
+        <h1>You are playing Lingle!</h1>
       </div>
       <div>
         {length > 0 ? (
           <div>
-            <div className="game-header">
-              <p>Okay let's start this mofo</p>
-            </div>
             {correct ? (
               <div>
                 <h1>You Win!</h1>
@@ -365,12 +351,12 @@ function App() {
           <div>
             <h2>Select Lingle word length: </h2>
             <form>
-              <input
+              <input class="numbox"
                 type="number"
                 value={tmpLength}
                 onChange={(res) => setTmpLength(res.target.value)}
               />
-              <input
+              <input class="subbox"
                 type="submit"
                 value="Submit"
                 onClick={(event) => {
