@@ -20,6 +20,7 @@ function App() {
   const [correct, setCorrect] = useState(false);
   const [wordHash, setWordHash] = useState({});
   const [hashList, setHashList] = useState([]);
+  const [keys, setKeys] = useState({});
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
@@ -81,8 +82,8 @@ function App() {
   const crossBoard = (
     <div className="cross-board">
       <div>
-        <form>
-          {Array.from({ length }, (_, k) => (
+        <form id="cross">
+          {Array.from({ length: length }, (_, k) => (
             <input
               className="cross-board-input"
               type="text"
@@ -124,19 +125,18 @@ function App() {
   const filterWords = () => {
     const res = scrabbleArray.filter((s) => s.length == tmpLength);
     setScrabble(res);
-    console.log(res);
   };
 
   const randomWord = () => {
     const res = wordArray.filter((s) => s.length == tmpLength);
-    console.log(res);
     const random = res[Math.floor(Math.random() * res.length)];
-    console.log(random);
     setAnswer(random);
     setWords(res);
+    console.log(random);
   };
 
   const updateWord = () => {
+    // document.getElementById("cross").reset()
     const str = word.join("");
     setWordString(str);
 
@@ -177,8 +177,9 @@ function App() {
       fullStr.push(
         <div>
           <div className="parent">
-            {Array.from({ length }, (_, k) => (
+            {Array.from({ length: length }, (_, k) => (
               <div
+                key={ k }
                 style={{ backgroundColor: hashList[i][k] }}
                 className="child inline-block-child"
               >
@@ -257,6 +258,18 @@ function App() {
   let wordMap = [];
 
   const backend = (wordString) => {
+    let keyboard = {};
+    console.log(keys);
+    if (Object.keys(keys).length == 0) {
+      console.log("testing1")
+      let c = "white";
+      keyboard = {a: c, b: c, c: c, d: c, e: c, f: c, g: c, h: c, i: c, j: c, k: c, l: c, m: c,
+                  n: c, o: c, p: c, q: c, r: c, s: c, t: c, u: c, v: c, w: c, x: c, y: c, z: c};
+    } else {
+      console.log("testing2")
+      keyboard = keys;
+    }
+    console.log(keyboard);
     for (let i = 0; i < wordString.length; ++i) {
       let idxStr = i.toString();
       wordMap.push("");
@@ -274,12 +287,17 @@ function App() {
         if (tmpDict[currLetter] == 0) {
           for (let j = 0; j < dictionary2[currLetter].length; ++j) {
             wordMap[dictionary2[currLetter][j]] = "grey";
+            keyboard[currLetter] = "grey";
           }
         } else if (dictionary2[currLetter].length == 1) {
           if (currLetter == answer.charAt(i)) {
-            wordMap[i] = "green";
+            wordMap[i] = "#30c93b";
+            keyboard[currLetter] = "#30c93b";
           } else {
-            wordMap[i] = "yellow";
+            wordMap[i] = "#e1b137";
+            if (keyboard[currLetter] == "white") {
+              keyboard[currLetter] = "#e1b137";
+            }
           }
         } else {
           let tmpLst = dictionary2[currLetter];
@@ -289,7 +307,8 @@ function App() {
             if (currLetter == answer.charAt(k)) {
               tmpDict[currLetter] -= 1;
               tmpLst = tmpLst.filter((i) => i !== k);
-              wordMap[k] = "green";
+              wordMap[k] = "#30c93b";
+              keyboard[currLetter] = "#30c93b";
             }
           }
           tmpLst2 = tmpLst;
@@ -297,19 +316,72 @@ function App() {
             let k = tmpLst[j];
             if (tmpDict[currLetter] <= 0) {
               wordMap[k] = "grey";
+              if (keyboard[currLetter] == "white") {
+                keyboard[currLetter] = "grey";
+              }
             } else {
               tmpDict[currLetter] -= 1;
-              wordMap[k] = "yellow";
+              wordMap[k] = "#e1b137";
+              if (keyboard[currLetter] == "white") {
+                keyboard[currLetter] = "#e1b137";
+              }
             }
           }
         }
       }
     }
+    console.log(keyboard);
+    setKeys(keyboard);
     setWordHash(wordMap);
     let hashy = hashList;
     hashy.push(wordMap);
     setHashList(hashy);
   };
+
+  let row1 = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
+  let len1 = row1.length;
+  let row2 = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+  let len2 = row2.length;
+  let row3 = ["z", "x", "c", "v", "b", "n", "m"];
+  let len3 = row3.length;
+  const KeyboardRender = () => {
+    return(
+      <div className="keys">
+        <div className="parent">
+          {Array.from({ length: len1 }, (_, k) => (
+            <div
+              key={k}
+              style={{ backgroundColor: keys[row1[k]] }}
+              className="keyboard"
+            >
+              {row1[k].toUpperCase()}
+            </div>
+          ))}
+        </div>
+        <div className="parent">
+          {Array.from({ length: len2 }, (_, k) => (
+            <div
+              key={k}
+              style={{ backgroundColor: keys[row2[k]] }}
+              className="keyboard"
+            >
+              {row2[k].toUpperCase()}
+            </div>
+          ))}
+        </div>
+        <div className="parent">
+          {Array.from({ length: len3 }, (_, k) => (
+            <div
+              key={k}
+              style={{ backgroundColor: keys[row3[k]] }}
+              className="keyboard"
+            >
+              {row3[k].toUpperCase()}
+            </div>
+          ))}
+        </div>
+      </div>
+    );};
 
   return (
     <div className="App">
@@ -337,26 +409,31 @@ function App() {
               <div>{crossBoard}</div>
               {submitButton === true && debug === true ? (
                 <div>
-                  <button onClick={updateWord}>submit now</button>
-                  <h3>Hey! That is not a valid word! Try again :(</h3>
+                  <button type="button" onClick={updateWord}>submit now</button>
+                  <h3>Not a valid word! Try Again!</h3>
                 </div>
               ) : submitButton === true ? (
-                <button onClick={updateWord}>submit now</button>
+                <button type="button" onClick={updateWord}>submit now</button>
               ) : (
                 <p></p>
               )}
+            </div>
+            <div>
+              <div className="keys">
+                <KeyboardRender />
+              </div>
             </div>
           </div>
         ) : playing === true ? (
           <div>
             <h2>Select Lingle word length: </h2>
             <form>
-              <input class="numbox"
+              <input className="numbox"
                 type="number"
                 value={tmpLength}
                 onChange={(res) => setTmpLength(res.target.value)}
               />
-              <input class="subbox"
+              <input className="subbox"
                 type="submit"
                 value="Submit"
                 onClick={(event) => {

@@ -31,6 +31,11 @@ h2, h3 {
   text-align: center;
 }
 
+.keys {
+  text-align: center;
+  margin: auto;
+}
+
 .subbox {
   width: 80px;
   height: 32px;
@@ -142,12 +147,24 @@ h2, h3 {
 .inline-block-child {
   display: inline-block;
   border-radius: 22px;
-  width: 75px;
-  height: 75px;
-  font-size: 58px;
+  width: 83px;
+  height: 83px;
+  font-size: 70px;
   text-align: center;
   font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
   font-weight: 550;
+}
+
+.keyboard {
+  display: inline-block;
+  border-radius: 2px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+  font-weight: 400;
+  background-color: white;
 }
 
 li {
