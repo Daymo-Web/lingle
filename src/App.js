@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import scrabbleArray from "./scrabble";
 import wordArray from "./words";
 import "./App.css";
@@ -20,6 +20,7 @@ function App() {
   const [correct, setCorrect] = useState(false);
   const [wordHash, setWordHash] = useState({});
   const [hashList, setHashList] = useState([]);
+  const input = useRef(document.getElementById("cross"));
   const [keys, setKeys] = useState({});
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
@@ -28,10 +29,9 @@ function App() {
     // Check if they hit the max character length
     // Check if it's not the last input field
     const form = e.target.form;
-      const index = [...form].indexOf(e.target);
-      const newArray = Array.from(word);
+    const index = [...form].indexOf(e.target);
+    const newArray = Array.from(word);
     if (value.length === maxLength || value) {
-      
       newArray[index] = value;
       setWord(newArray);
       if (index === length - 1) {
@@ -87,7 +87,7 @@ function App() {
   const crossBoard = (
     <div className="cross-board">
       <div>
-        <form id="cross">
+        <form ref={input} id="cross">
           {Array.from({ length: length }, (_, k) => (
             <input
               className="cross-board-input"
@@ -96,9 +96,7 @@ function App() {
               key={k}
               defaultValue={""}
               maxLength={1}
-              
               onKeyUp={(e) => {
-                
                 if (e.key === "Backspace") {
                   handleBackspace(e);
                 } else if (e.keyCode === 37) {
@@ -108,7 +106,6 @@ function App() {
                 } else {
                   handleChange(e);
                 }
-
               }}
             ></input>
           ))}
@@ -165,9 +162,9 @@ function App() {
     } else {
       setDebug(true);
     }
-    document.getElementById("cross").reset();
-    e.preventDefault();
+    input.current.reset();
 
+    e.preventDefault();
   };
 
   // const allSqaures = (
