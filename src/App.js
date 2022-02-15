@@ -41,6 +41,7 @@ function App() {
       e.preventDefault();
     }
   };
+
   const handleBackspace = (e) => {
     const { maxLength, value, name } = e.target;
     if (value.length === 0) {
@@ -57,6 +58,7 @@ function App() {
       console.log(index);
     }
   };
+
   const handleLeft = (e) => {
     const form = e.target.form;
     const index = [...form].indexOf(e.target);
@@ -68,6 +70,7 @@ function App() {
     e.preventDefault();
     console.log(index);
   };
+
   const handleRight = (e) => {
     const form = e.target.form;
     const index = [...form].indexOf(e.target);
@@ -79,6 +82,7 @@ function App() {
     e.preventDefault();
     console.log(index);
   };
+
   const crossBoard = (
     <div className="cross-board">
       <div>
@@ -179,7 +183,7 @@ function App() {
           <div className="parent">
             {Array.from({ length: length }, (_, k) => (
               <div
-                key={ k }
+                key={k}
                 style={{ backgroundColor: hashList[i][k] }}
                 className="child inline-block-child"
               >
@@ -194,7 +198,7 @@ function App() {
   };
 
   const checkWords = (str) => {
-    return (scrabble.includes(str.toUpperCase()) || words.includes(str));
+    return scrabble.includes(str.toUpperCase()) || words.includes(str);
   };
 
   let dictionary = {
@@ -261,12 +265,38 @@ function App() {
     let keyboard = {};
     console.log(keys);
     if (Object.keys(keys).length == 0) {
-      console.log("testing1")
+      console.log("testing1");
       let c = "white";
-      keyboard = {a: c, b: c, c: c, d: c, e: c, f: c, g: c, h: c, i: c, j: c, k: c, l: c, m: c,
-                  n: c, o: c, p: c, q: c, r: c, s: c, t: c, u: c, v: c, w: c, x: c, y: c, z: c};
+      keyboard = {
+        a: c,
+        b: c,
+        c: c,
+        d: c,
+        e: c,
+        f: c,
+        g: c,
+        h: c,
+        i: c,
+        j: c,
+        k: c,
+        l: c,
+        m: c,
+        n: c,
+        o: c,
+        p: c,
+        q: c,
+        r: c,
+        s: c,
+        t: c,
+        u: c,
+        v: c,
+        w: c,
+        x: c,
+        y: c,
+        z: c,
+      };
     } else {
-      console.log("testing2")
+      console.log("testing2");
       keyboard = keys;
     }
     console.log(keyboard);
@@ -345,7 +375,7 @@ function App() {
   let row3 = ["z", "x", "c", "v", "b", "n", "m"];
   let len3 = row3.length;
   const KeyboardRender = () => {
-    return(
+    return (
       <div className="keys">
         <div className="parent">
           {Array.from({ length: len1 }, (_, k) => (
@@ -381,7 +411,8 @@ function App() {
           ))}
         </div>
       </div>
-    );};
+    );
+  };
 
   return (
     <div className="App">
@@ -409,11 +440,15 @@ function App() {
               <div>{crossBoard}</div>
               {submitButton === true && debug === true ? (
                 <div>
-                  <button type="button" onClick={updateWord}>submit now</button>
+                  <button type="button" onClick={updateWord}>
+                    submit now
+                  </button>
                   <h3>Not a valid word! Try Again!</h3>
                 </div>
               ) : submitButton === true ? (
-                <button type="button" onClick={updateWord}>submit now</button>
+                <button type="button" onClick={updateWord}>
+                  submit now
+                </button>
               ) : (
                 <p></p>
               )}
@@ -428,12 +463,14 @@ function App() {
           <div>
             <h2>Select Lingle word length: </h2>
             <form>
-              <input className="numbox"
+              <input
+                className="numbox"
                 type="number"
                 value={tmpLength}
                 onChange={(res) => setTmpLength(res.target.value)}
               />
-              <input className="subbox"
+              <input
+                className="subbox"
                 type="submit"
                 value="Submit"
                 onClick={(event) => {
