@@ -24,13 +24,14 @@ function App() {
   const handleChange = (e) => {
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
-
+    console.log(value.length);
     // Check if they hit the max character length
     // Check if it's not the last input field
-    if (value.length === maxLength) {
-      const form = e.target.form;
+    const form = e.target.form;
       const index = [...form].indexOf(e.target);
       const newArray = Array.from(word);
+    if (value.length === maxLength || value) {
+      
       newArray[index] = value;
       setWord(newArray);
       if (index === length - 1) {
@@ -55,7 +56,7 @@ function App() {
       }
 
       e.preventDefault();
-      console.log(index);
+      // console.log(index);
     }
   };
 
@@ -68,7 +69,7 @@ function App() {
     }
 
     e.preventDefault();
-    console.log(index);
+    // console.log(index);
   };
 
   const handleRight = (e) => {
@@ -80,7 +81,7 @@ function App() {
     }
 
     e.preventDefault();
-    console.log(index);
+    // console.log(index);
   };
 
   const crossBoard = (
@@ -95,15 +96,19 @@ function App() {
               key={k}
               defaultValue={""}
               maxLength={1}
-              onChange={handleChange}
-              onKeyDown={(e) => {
+              
+              onKeyUp={(e) => {
+                
                 if (e.key === "Backspace") {
                   handleBackspace(e);
                 } else if (e.keyCode === 37) {
                   handleLeft(e);
                 } else if (e.keyCode === 39) {
                   handleRight(e);
+                } else {
+                  handleChange(e);
                 }
+
               }}
             ></input>
           ))}
@@ -136,11 +141,10 @@ function App() {
     const random = res[Math.floor(Math.random() * res.length)];
     setAnswer(random);
     setWords(res);
-    console.log(random);
+    // console.log(random);
   };
 
-  const updateWord = () => {
-    // document.getElementById("cross").reset()
+  const updateWord = (e) => {
     const str = word.join("");
     setWordString(str);
 
@@ -161,11 +165,9 @@ function App() {
     } else {
       setDebug(true);
     }
-    // let newArray = Array.from(word);
-    // for (let i = 0; i < length; ++i) {
-    //   newArray[i] = "";
-    // }
-    // setWord(newArray);
+    document.getElementById("cross").reset();
+    e.preventDefault();
+
   };
 
   // const allSqaures = (
@@ -263,9 +265,9 @@ function App() {
 
   const backend = (wordString) => {
     let keyboard = {};
-    console.log(keys);
+    // console.log(keys);
     if (Object.keys(keys).length == 0) {
-      console.log("testing1");
+      // console.log("testing1");
       let c = "white";
       keyboard = {
         a: c,
@@ -296,10 +298,10 @@ function App() {
         z: c,
       };
     } else {
-      console.log("testing2");
+      // console.log("testing2");
       keyboard = keys;
     }
-    console.log(keyboard);
+    // console.log(keyboard);
     for (let i = 0; i < wordString.length; ++i) {
       let idxStr = i.toString();
       wordMap.push("");
@@ -360,7 +362,7 @@ function App() {
         }
       }
     }
-    console.log(keyboard);
+    // console.log(keyboard);
     setKeys(keyboard);
     setWordHash(wordMap);
     let hashy = hashList;
