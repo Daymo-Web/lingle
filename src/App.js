@@ -20,9 +20,12 @@ function App() {
   const [correct, setCorrect] = useState(false);
   const [wordHash, setWordHash] = useState({});
   const [hashList, setHashList] = useState([]);
-  const input = useRef(document.getElementById("cross"));
+  const input = useRef(null);
   const [keys, setKeys] = useState({});
   const handleChange = (e) => {
+    if (e.key === "Backspace" || e.keyCode === 37 || e.keyCode === 39) {
+      return;
+    }
     const { maxLength, value, name } = e.target;
     const [fieldName, fieldIndex] = name.split("-");
     console.log(value.length);
@@ -87,24 +90,26 @@ function App() {
   const crossBoard = (
     <div className="cross-board">
       <div>
-        <form ref={input} id="cross">
+        <form id="cross" ref={input}>
           {Array.from({ length: length }, (_, k) => (
             <input
               className="cross-board-input"
+              id={`cross-board-input-${k}`}
               type="text"
               name="name"
               key={k}
               defaultValue={""}
               maxLength={1}
               onKeyUp={(e) => {
+                handleChange(e);
+              }}
+              onKeyDown={(e) => {
                 if (e.key === "Backspace") {
                   handleBackspace(e);
                 } else if (e.keyCode === 37) {
                   handleLeft(e);
                 } else if (e.keyCode === 39) {
                   handleRight(e);
-                } else {
-                  handleChange(e);
                 }
               }}
             ></input>
@@ -178,13 +183,14 @@ function App() {
     for (let i = 0; i < guesses.length; ++i) {
       let currGuess = guesses[i];
       fullStr.push(
-        <div>
+        <div id="square">
           <div className="parent">
             {Array.from({ length: length }, (_, k) => (
               <div
                 key={k}
                 style={{ backgroundColor: hashList[i][k] }}
                 className="child inline-block-child"
+                id={`inline-block-child${k}`}
               >
                 {currGuess[k].toUpperCase()}
               </div>
