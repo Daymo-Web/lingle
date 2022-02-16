@@ -20,7 +20,7 @@ function App() {
   const [correct, setCorrect] = useState(false);
   const [wordHash, setWordHash] = useState({});
   const [hashList, setHashList] = useState([]);
-  const input = useRef(null);
+  const input = useRef();
   const [keys, setKeys] = useState({});
   const handleChange = (e) => {
     if (e.key === "Backspace" || e.keyCode === 37 || e.keyCode === 39) {
@@ -167,7 +167,11 @@ function App() {
     } else {
       setDebug(true);
     }
-    input.current.reset();
+    try {
+      input.current.reset();
+    } catch (e) {
+      console.log(e.error);
+    }
 
     e.preventDefault();
   };
