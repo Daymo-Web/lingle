@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import scrabbleArray from "./scrabble";
 import wordArray from "./words";
+import { Modal, Button } from "react-bootstrap";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
   const [hashList, setHashList] = useState([]);
   const input = useRef();
   const [keys, setKeys] = useState({});
+  const [show, setShow] = useState(false);
+  // const MyVerticallyCenteredModal = (props) => {
+  //   return <></>;
+  // };
   const handleChange = (e) => {
     if (e.key === "Backspace" || e.keyCode === 37 || e.keyCode === 39) {
       return;
@@ -100,9 +105,9 @@ function App() {
               key={k}
               defaultValue={""}
               maxLength={1}
-              onKeyUp={(e) => {
-                handleChange(e);
-              }}
+              // onKeyUp={(e) => {
+              // }}
+              onInput={handleChange}
               onKeyDown={(e) => {
                 if (e.key === "Backspace") {
                   handleBackspace(e);
@@ -111,6 +116,7 @@ function App() {
                 } else if (e.keyCode === 39) {
                   handleRight(e);
                 } else if (e.key === "Enter") {
+                  handleChange(e);
                   updateWord(e);
                 }
               }}
@@ -432,36 +438,40 @@ function App() {
     setHashList([]);
     setWordHash({});
   };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className="App">
-      <div className="circle-1"></div>
-      <div className="circle-2"></div>
-      <div className="circle-3"></div>
-      <div className="circle-4"></div>
-      <div className="circle-5"></div>
-      <div className="circle-6"></div>
-      <div className="circle-7"></div>
-      <div className="circle-8"></div>
-      <div className="circle-9"></div>
-      <div className="circle-10"></div>
-      <div className="circle-11"></div>
-      <div className="circle-12"></div>
-      <div className="circle-13"></div>
-      <div className="circle-14"></div>
-      <div className="circle-15"></div>
-      <div className="circle-16"></div>
-      <div className="circle-17"></div>
-      <div className="circle-18"></div>
-      <div className="circle-19"></div>
-      <div className="circle-20"></div>
+      <div className="circles">
+        <div className="circle-1"></div>
+        <div className="circle-2"></div>
+        <div className="circle-3"></div>
+        <div className="circle-4"></div>
+        <div className="circle-5"></div>
+        <div className="circle-6"></div>
+        <div className="circle-7"></div>
+        <div className="circle-8"></div>
+        <div className="circle-9"></div>
+        <div className="circle-10"></div>
+        <div className="circle-11"></div>
+        <div className="circle-12"></div>
+        <div className="circle-13"></div>
+        <div className="circle-14"></div>
+        <div className="circle-15"></div>
+        <div className="circle-16"></div>
+        <div className="circle-17"></div>
+        <div className="circle-18"></div>
+        <div className="circle-19"></div>
+        <div className="circle-20"></div>
+      </div>
 
       <div className="header">
         <div>
           <h1>You are playing Lingle!</h1>
         </div>
       </div>
-      <div>
+      <div className="body">
         {length > 2 ? (
           <div>
             {cnt > 0 ? (
@@ -483,13 +493,13 @@ function App() {
               ) : submitButton === true && debug === true ? (
                 <div>
                   <button className="button" type="button" onClick={updateWord}>
-                    submit now
+                    Enter
                   </button>
                   <h3>Not a valid word! Try Again!</h3>
                 </div>
               ) : submitButton === true ? (
                 <button className="button" type="button" onClick={updateWord}>
-                  submit now
+                  Enter
                 </button>
               ) : (
                 <div></div>
@@ -531,9 +541,55 @@ function App() {
             <button className="button" onClick={play}>
               Play now
             </button>
+
+            {/* <Button variant="primary" onClick={handleShow}>
+              Launch demo modal
+            </Button> */}
+
+            {/* <Modal
+              show={modalShow}
+              size="lg"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                  Modal heading
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h4>What is Lingle?</h4>
+                <p>
+                  Lingle is an adaptation to the New York Time's Wordle game. In
+                  wordle, you play with 5 letter words, and you can only play
+                  once a day. In Lingle, users can choose how many letters they
+                  want starting from 3 letters. There is
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={(props) => {
+                  props.onHide();
+                  setModalShow(false);
+                }}>Close</Button>
+              </Modal.Footer>
+            </Modal> */}
           </div>
         )}
       </div>
+      {/* <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
     </div>
   );
 }

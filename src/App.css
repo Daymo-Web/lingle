@@ -170,6 +170,7 @@ h3 {
 
 .header {
   display: flex;
+  position: relative;
   flex-direction: column;
   flex-wrap: wrap;
 }
@@ -287,8 +288,8 @@ ul {
   height: 100px;
   background: #fffffc;
   border-radius: 50%;
-  margin-left: 35%;
-  margin-top: 20%;
+  margin-left: 38%;
+  margin-top: 22%;
 }
 .circle-9 {
   z-index: -1;
@@ -303,8 +304,8 @@ ul {
 .circle-10 {
   z-index: -1;
   position: fixed;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   background: #caffbf;
   border-radius: 50%;
   margin-left: 45%;
@@ -317,8 +318,8 @@ ul {
   height: 50px;
   background: #bdb2ff;
   border-radius: 50%;
-  margin-left: 70%;
-  margin-top: 45%;
+  margin-left: 35%;
+  margin-top: 35%;
 }
 .circle-12 {
   z-index: -1;
@@ -335,10 +336,10 @@ ul {
   position: fixed;
   width: 150px;
   height: 150px;
-  background: #bdb2ff;
+  background: #9bf6ff;
   border-radius: 50%;
   margin-left: 90%;
-  margin-top: 10%;
+  margin-top: 15%;
 }
 .circle-14 {
   z-index: -1;
@@ -353,11 +354,12 @@ ul {
 .circle-15 {
   z-index: -1;
   position: fixed;
-  width: 400px;
-  height: 400px;
-  background: #bdb2ff;
+  width: 200px;
+  height: 200px;
+  background: #ffc6ff;
+
   border-radius: 50%;
-  margin-left: 85%;
+  margin-left: 65%;
   margin-top: 40%;
 }
 .circle-16 {
@@ -384,10 +386,10 @@ ul {
   position: fixed;
   width: 200px;
   height: 200px;
-  background: #ffc6ff;
+  background: #d88c9a;
   border-radius: 50%;
   margin-left: 28%;
-  margin-top: 40%;
+  margin-top: 45%;
 }
 .circle-19 {
   z-index: -1;
@@ -409,7 +411,13 @@ ul {
   margin-left: 15%;
   margin-top: 5%;
 }
-
+.circles {
+  z-index: -1;
+  position: relative;
+}
+.body {
+  position: relative;
+}
 #yin-yang {
   width: 96px;
   box-sizing: content-box;
@@ -447,14 +455,22 @@ ul {
 }
 
 .button {
+  z-index: 0;
   min-width: 100px;
   min-height: 50px;
   border-radius: 30px;
+  font-family: serif;
   border-width: 0ch;
   font-size: larger;
   color: #ffffff;
-  background-color: burlywood;
+  background-color: #1d84b5;
 }
+/* .modal {
+  background-color: #ffffff;
+  min-height: 400px;
+  vertical-align: center;
+  align-self: center;
+} */
 html {
   /* background: url(cooly3.png) no-repeat center center fixed; */
   background-color: #293132;
