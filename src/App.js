@@ -425,6 +425,11 @@ function App() {
 
   return (
     <div className="App">
+      <div className="circle-1"></div>
+      <div className="circle-2"></div>
+      <div className="circle-3"></div>
+      <div className="circle-4"></div>
+      <div className="circle-5"></div>
       <div>
         <h1>You are playing Lingle!</h1>
       </div>
