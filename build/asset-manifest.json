@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/Lingle/static/css/main.882182f8.css",
-    "main.js": "/Lingle/static/js/main.abbaaf56.js",
-    "static/js/787.f90e7daf.chunk.js": "/Lingle/static/js/787.f90e7daf.chunk.js",
-    "static/media/cooly3.png": "/Lingle/static/media/cooly3.9ed50c8a9aa74011ca99.png",
+    "main.css": "/Lingle/static/css/main.ae7ec5b1.css",
+    "main.js": "/Lingle/static/js/main.7fabcab2.js",
+    "static/js/787.876ca118.chunk.js": "/Lingle/static/js/787.876ca118.chunk.js",
     "index.html": "/Lingle/index.html",
-    "main.882182f8.css.map": "/Lingle/static/css/main.882182f8.css.map",
-    "main.abbaaf56.js.map": "/Lingle/static/js/main.abbaaf56.js.map",
-    "787.f90e7daf.chunk.js.map": "/Lingle/static/js/787.f90e7daf.chunk.js.map"
+    "main.ae7ec5b1.css.map": "/Lingle/static/css/main.ae7ec5b1.css.map",
+    "main.7fabcab2.js.map": "/Lingle/static/js/main.7fabcab2.js.map",
+    "787.876ca118.chunk.js.map": "/Lingle/static/js/787.876ca118.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.882182f8.css",
-    "static/js/main.abbaaf56.js"
+    "static/css/main.ae7ec5b1.css",
+    "static/js/main.7fabcab2.js"
   ]
 }
