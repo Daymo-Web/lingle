@@ -132,7 +132,7 @@ h3 {
 }
 
 .btn-liquid canvas {
-  position: absolute;
+  position: fixed;
   top: -50px;
   right: -50px;
   bottom: -50px;
@@ -168,6 +168,12 @@ h3 {
   background-color: white;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
 li {
 }
 ul {
@@ -190,12 +196,12 @@ ul {
 
 .circle-2 {
   position: fixed;
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
   background: #ffadad;
   border-radius: 50%;
   margin-left: 75%;
-  margin-top: 20%;
+  margin-top: 25%;
 }
 .circle-3 {
   position: fixed;
@@ -217,7 +223,7 @@ ul {
   margin-top: -20%;
 }
 .circle-5 {
-  position: absolute;
+  position: fixed;
   width: 150px;
   height: 150px;
   background: #fdffb6;
@@ -225,7 +231,229 @@ ul {
   margin-left: 15%;
   margin-top: 40%;
 }
+.circle-6 {
+  z-index: -1;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: #fffffc;
+  border-radius: 50%;
+  margin-left: 35%;
+  margin-top: 20%;
+}
+.circle-7 {
+  z-index: -1;
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: #ffd6a5;
+  border-radius: 50%;
+  margin-left: 25%;
+  margin-top: 8%;
+}
+.circle-8 {
+  z-index: -1;
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background: #a0c4ff;
+  border-radius: 50%;
+  margin-left: 75%;
+  margin-top: 10%;
+}
+.circle-4 {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: #caffbf;
+  border-radius: 50%;
+  margin-left: 80%;
+  margin-right: -40%;
+  margin-top: -20%;
+}
+.circle-5 {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background: #fdffb6;
+  border-radius: 50%;
+  margin-left: 15%;
+  margin-top: 40%;
+}
+.circle-6 {
+  z-index: -1;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: #fffffc;
+  border-radius: 50%;
+  margin-left: 35%;
+  margin-top: 20%;
+}
+.circle-9 {
+  z-index: -1;
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: #bdb2ff;
+  border-radius: 50%;
+  margin-left: 55%;
+  margin-top: 10%;
+}
+.circle-10 {
+  z-index: -1;
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  background: #caffbf;
+  border-radius: 50%;
+  margin-left: 45%;
+  margin-top: 30%;
+}
+.circle-11 {
+  z-index: -1;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: #bdb2ff;
+  border-radius: 50%;
+  margin-left: 70%;
+  margin-top: 45%;
+}
+.circle-12 {
+  z-index: -1;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: #fdffb6;
+  border-radius: 50%;
+  margin-left: 65%;
+  margin-top: 30%;
+}
+.circle-13 {
+  z-index: -1;
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background: #bdb2ff;
+  border-radius: 50%;
+  margin-left: 90%;
+  margin-top: 10%;
+}
+.circle-14 {
+  z-index: -1;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: #ffadad;
+  border-radius: 50%;
+  margin-left: 25%;
+  margin-top: 30%;
+}
+.circle-15 {
+  z-index: -1;
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: #bdb2ff;
+  border-radius: 50%;
+  margin-left: 85%;
+  margin-top: 40%;
+}
+.circle-16 {
+  z-index: -1;
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background: #9bf6ff;
+  border-radius: 50%;
+  margin-left: 15%;
+  margin-top: 20%;
+}
+.circle-17 {
+  z-index: -1;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: #fdffb6;
+  border-radius: 50%;
+  margin-left: 70%;
+}
+.circle-18 {
+  z-index: -1;
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  background: #ffc6ff;
+  border-radius: 50%;
+  margin-left: 28%;
+  margin-top: 40%;
+}
+.circle-19 {
+  z-index: -1;
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: #bdb2ff;
+  border-radius: 50%;
+  margin-left: 85%;
+  margin-top: 40%;
+}
+.circle-20 {
+  z-index: -1;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  background: #ffadad;
+  border-radius: 50%;
+  margin-left: 15%;
+  margin-top: 5%;
+}
 
+#yin-yang {
+  width: 96px;
+  box-sizing: content-box;
+  height: 48px;
+  background: #eee;
+  border-color: red;
+  border-style: solid;
+  border-width: 2px 2px 50px 2px;
+  border-radius: 100%;
+  position: relative;
+}
+#yin-yang:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background: #eee;
+  border: 18px solid red;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  box-sizing: content-box;
+}
+#yin-yang:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: red;
+  border: 18px solid #eee;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  box-sizing: content-box;
+}
+
+.button {
+  min-width: 100px;
+  min-height: 50px;
+  border-radius: 20px;
+  font-size: larger;
+  color: #ffffff;
+  background-color: burlywood;
+}
 html {
   /* background: url(cooly3.png) no-repeat center center fixed; */
   background-color: #293132;

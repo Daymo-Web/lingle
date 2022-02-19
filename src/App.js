@@ -8,7 +8,7 @@ function App() {
   const [scrabble, setScrabble] = useState([]);
   const [playing, setPlaying] = useState(false);
   const [length, setLength] = useState(0);
-  const [tmpLength, setTmpLength] = useState(0);
+  const [tmpLength, setTmpLength] = useState(3);
   const [word, setWord] = useState([]);
   const [wordString, setWordString] = useState("");
   const [submitButton, setSubmitButton] = useState(false);
@@ -110,6 +110,8 @@ function App() {
                   handleLeft(e);
                 } else if (e.keyCode === 39) {
                   handleRight(e);
+                } else if (e.key === "Enter") {
+                  updateWord(e);
                 }
               }}
             ></input>
@@ -149,6 +151,11 @@ function App() {
   const updateWord = (e) => {
     const str = word.join("");
     setWordString(str);
+    const form = e.target.form;
+
+    form.elements[0].focus();
+
+    e.preventDefault();
 
     if (str == answer) {
       setCorrect(true);
@@ -423,6 +430,15 @@ function App() {
     );
   };
 
+  const PlayAgain = () => {
+    setLength(0);
+    setGuesses([]);
+    setCorrect(false);
+    setKeys({});
+    setHashList([]);
+    setWordHash({});
+  };
+
   return (
     <div className="App">
       <div className="circle-1"></div>
@@ -430,19 +446,30 @@ function App() {
       <div className="circle-3"></div>
       <div className="circle-4"></div>
       <div className="circle-5"></div>
-      <div>
-        <h1>You are playing Lingle!</h1>
+      <div className="circle-6"></div>
+      <div className="circle-7"></div>
+      <div className="circle-8"></div>
+      <div className="circle-9"></div>
+      <div className="circle-10"></div>
+      <div className="circle-11"></div>
+      <div className="circle-12"></div>
+      <div className="circle-13"></div>
+      <div className="circle-14"></div>
+      <div className="circle-15"></div>
+      <div className="circle-16"></div>
+      <div className="circle-17"></div>
+      <div className="circle-18"></div>
+      <div className="circle-19"></div>
+      <div className="circle-20"></div>
+
+      <div className="header">
+        <div>
+          <h1>You are playing Lingle!</h1>
+        </div>
       </div>
       <div>
-        {length > 0 ? (
+        {length > 2 ? (
           <div>
-            {correct ? (
-              <div>
-                <h1>You Win!</h1>
-              </div>
-            ) : (
-              <div></div>
-            )}
             {cnt > 0 ? (
               <div className="square-guesses">
                 <SquareGuesses />
@@ -452,19 +479,35 @@ function App() {
             )}
             <div className="game-body">
               <div>{crossBoard}</div>
-              {submitButton === true && debug === true ? (
+              {correct ? (
                 <div>
-                  <button type="button" onClick={updateWord}>
+                  <h1>You Win! Play Again?</h1>
+                  <button className="button" onClick={PlayAgain}>
+                    Play Again
+                  </button>
+                </div>
+              ) : submitButton === true && debug === true ? (
+                <div>
+                  <button className="button" type="button" onClick={updateWord}>
                     submit now
                   </button>
                   <h3>Not a valid word! Try Again!</h3>
                 </div>
               ) : submitButton === true ? (
-                <button type="button" onClick={updateWord}>
+                <button
+                  className="button"
+                  type="button"
+                  onClick={updateWord}
+                  onKeyPress={(e) => {
+                    if (e.keyCode === 13) {
+                      updateWord();
+                    }
+                  }}
+                >
                   submit now
                 </button>
               ) : (
-                <p></p>
+                <div></div>
               )}
             </div>
             <div>
@@ -479,12 +522,13 @@ function App() {
             <form>
               <input
                 className="numbox"
+                min={3}
                 type="number"
                 value={tmpLength}
                 onChange={(res) => setTmpLength(res.target.value)}
               />
               <input
-                className="subbox"
+                className="button"
                 type="submit"
                 value="Submit"
                 onClick={(event) => {
@@ -498,7 +542,11 @@ function App() {
             </form>
           </div>
         ) : (
-          <button onClick={play}>Play now</button>
+          <div>
+            <button className="button" onClick={play}>
+              Play now
+            </button>
+          </div>
         )}
       </div>
     </div>
