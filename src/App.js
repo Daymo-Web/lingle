@@ -148,14 +148,9 @@ function App() {
     // console.log(random);
   };
 
-  const updateWord = (e) => {
+  const updateWord = () => {
     const str = word.join("");
     setWordString(str);
-    const form = e.target.form;
-
-    form.elements[0].focus();
-
-    e.preventDefault();
 
     if (str == answer) {
       setCorrect(true);
@@ -165,7 +160,7 @@ function App() {
     if (isValid) {
       setDebug(false);
       backend(str);
-      if (guesses.length == 0) {
+      if (guesses.length === 0) {
         setGuesses([word]);
       } else {
         setGuesses([...guesses, word]);
@@ -176,11 +171,10 @@ function App() {
     }
     try {
       input.current.reset();
+      input.current.elements[0].focus();
     } catch (e) {
       console.log(e.error);
     }
-
-    e.preventDefault();
   };
 
   // const allSqaures = (
@@ -362,13 +356,13 @@ function App() {
             let k = tmpLst[j];
             if (tmpDict[currLetter] <= 0) {
               wordMap[k] = "grey";
-              if (keyboard[currLetter] == "white") {
+              if (keyboard[currLetter] === "white") {
                 keyboard[currLetter] = "grey";
               }
             } else {
               tmpDict[currLetter] -= 1;
               wordMap[k] = "#e1b137";
-              if (keyboard[currLetter] == "white") {
+              if (keyboard[currLetter] === "white") {
                 keyboard[currLetter] = "#e1b137";
               }
             }
@@ -494,16 +488,7 @@ function App() {
                   <h3>Not a valid word! Try Again!</h3>
                 </div>
               ) : submitButton === true ? (
-                <button
-                  className="button"
-                  type="button"
-                  onClick={updateWord}
-                  onKeyPress={(e) => {
-                    if (e.keyCode === 13) {
-                      updateWord();
-                    }
-                  }}
-                >
+                <button className="button" type="button" onClick={updateWord}>
                   submit now
                 </button>
               ) : (

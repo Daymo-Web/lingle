@@ -449,7 +449,8 @@ ul {
 .button {
   min-width: 100px;
   min-height: 50px;
-  border-radius: 20px;
+  border-radius: 30px;
+  border-width: 0ch;
   font-size: larger;
   color: #ffffff;
   background-color: burlywood;
