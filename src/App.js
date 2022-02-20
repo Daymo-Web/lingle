@@ -481,35 +481,42 @@ function App() {
             ) : (
               <div></div>
             )}
-            <div className="game-body">
-              <div>{crossBoard}</div>
-              {correct ? (
-                <div>
-                  <h1>You Win! Play Again?</h1>
-                  <button className="button" onClick={PlayAgain}>
-                    Play Again
-                  </button>
-                </div>
-              ) : submitButton === true && debug === true ? (
-                <div>
+
+            {!correct ? (
+              <div className="game-body">
+                <div>{crossBoard}</div>
+                {submitButton === true && debug === true ? (
+                  <div>
+                    <button
+                      className="button"
+                      type="button"
+                      onClick={updateWord}
+                    >
+                      Enter
+                    </button>
+                    <h3>Not a valid word! Try Again!</h3>
+                  </div>
+                ) : submitButton === true ? (
                   <button className="button" type="button" onClick={updateWord}>
                     Enter
                   </button>
-                  <h3>Not a valid word! Try Again!</h3>
+                ) : (
+                  <div></div>
+                )}
+                <div>
+                  <div className="keys">
+                    <KeyboardRender />
+                  </div>
                 </div>
-              ) : submitButton === true ? (
-                <button className="button" type="button" onClick={updateWord}>
-                  Enter
-                </button>
-              ) : (
-                <div></div>
-              )}
-            </div>
-            <div>
-              <div className="keys">
-                <KeyboardRender />
               </div>
-            </div>
+            ) : (
+              <div>
+                <h1>You Win! Play Again?</h1>
+                <button className="button" onClick={PlayAgain}>
+                  Play Again
+                </button>
+              </div>
+            )}
           </div>
         ) : playing === true ? (
           <div>
