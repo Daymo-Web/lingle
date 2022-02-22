@@ -11,9 +11,11 @@ const customStyles = {
   content: {
     top: "50%",
     left: "50%",
-    right: "auto",
-    bottom: "auto",
+    // right: "auto",
+    // bottom: "",
+    backgroundColor: "#ffadad",
     marginRight: "-50%",
+    minHeight: "80%",
     transform: "translate(-50%, -50%)",
   },
 };
@@ -477,7 +479,7 @@ function App() {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    subtitle.style.color = "#ae2012";
   }
 
   function closeModal() {
@@ -511,9 +513,15 @@ function App() {
       <div className="header">
         <style>{"html {background-color:" + setbgcolor + ";}"}</style>
         <Select
+          className="select"
+          defaultValue={colors[0]}
           options={colors}
           onChange={ddlHandle}
           placeholder="Dark Mode"
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: "20px",
+          })}
         ></Select>
         <div>
           <h1>You are playing Lingle!</h1>
@@ -602,16 +610,52 @@ function App() {
               style={customStyles}
               contentLabel="Example Modal"
             >
-              <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+              <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
+                What is Lingle?
+              </h2>
+
+              <div>
+                <p>
+                  Lingle is an adaptation to a popular NY times game called
+                  Wordle.{" "}
+                  <a href="https://www.nytimes.com/games/wordle/index.html">
+                    Click here to check out the orignal Wordle Game.
+                  </a>
+                </p>
+                <p>
+                  The rules to Worldle are simple. Just guess a word. Any word
+                  with five letters. Hints will appear after each word guess,
+                  showing whether letters are in the right spot, in the word but
+                  in the wrong spot, or not in the word at all. Using these
+                  hints, make another guess and repeat until you’ve got the word
+                  — or don’t get the word, and lose.
+                </p>
+                <p>
+                  If the color of the hint is{" "}
+                  <span className="green">green</span>, the letter is in the
+                  word and in the correct spot.
+                </p>
+                <p>
+                  If the color of the hint is{" "}
+                  <span className="yellow">yellow</span>, the letter is in the
+                  word but is in the wrong spot.
+                </p>
+                <p>
+                  If the color of the hint is <span className="grey">grey</span>
+                  , the letter is not in the word and should be discarded.
+                </p>
+                <p>
+                  We extended gameplay functionalities in Lingle from Wordle. In
+                  wordle, users get 6 tries to guess the word; we allowed
+                  unlimited tries for users to guess the word. We allowed users
+                  to choose what letter words they want to play with, rather
+                  than the default five ltter words from Wordle. We also
+                  implemented a Play Again function, where Wordle only lets you
+                  play their game once a day.
+                </p>
+                <p1>Creators: David Ha 🤪 & Jamison Homatas 🙂</p1>
+              </div>
               <button onClick={closeModal}>close</button>
-              <div>I am a modal</div>
-              <form>
-                <input />
-                <button>tab navigation</button>
-                <button>stays</button>
-                <button>inside</button>
-                <button>the modal</button>
-              </form>
             </Modal>
             <div>
               {/* <Modal show={show} onHide={handleClose}>
