@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  flex: 1;
+  height: 100%;
+  padding: 0;
+  flex-direction: column;
 }
 
 .game-header {
@@ -11,7 +15,7 @@
 }
 
 h1 {
-  color: white;
+  color: royalblue;
   font-family: serif;
   font-weight: bold;
   font-size: 58px;
@@ -19,7 +23,7 @@ h1 {
 
 h2,
 h3 {
-  color: white;
+  color: royalblue;
   font-family: serif;
   font-weight: bold;
   font-size: 40px;
@@ -417,6 +421,8 @@ ul {
 }
 .body {
   position: relative;
+  display: flexbox;
+  flex: 3;
 }
 #yin-yang {
   width: 96px;
@@ -469,9 +475,13 @@ ul {
   background-color: #ffffff;
   min-height: 400px;
   vertical-align: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   align-self: center;
 } */
+
 html {
-  /* background: url(cooly3.png) no-repeat center center fixed; */
-  background-color: #293132;
+  background-color: #292132;
 }

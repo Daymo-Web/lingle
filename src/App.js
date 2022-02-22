@@ -1,9 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import scrabbleArray from "./scrabble";
 import wordArray from "./words";
-import { Modal, Button } from "react-bootstrap";
 import "./App.css";
+// import { Modal } from "react-bootstrap";
+// import "bootstrap/dist/css/bootstrap.css";
+import Select from "react-select";
+import Modal from "react-modal";
 
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+Modal.setAppElement();
 function App() {
   const [words, setWords] = useState([]);
   const [scrabble, setScrabble] = useState([]);
@@ -21,12 +35,23 @@ function App() {
   const [correct, setCorrect] = useState(false);
   const [wordHash, setWordHash] = useState({});
   const [hashList, setHashList] = useState([]);
-  const input = useRef();
+  const input = useRef(document.forms);
   const [keys, setKeys] = useState({});
   const [show, setShow] = useState(false);
-  // const MyVerticallyCenteredModal = (props) => {
-  //   return <></>;
-  // };
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const back = useRef(document.body.outerHTML);
+  let colors = [
+    { label: "Dark Mode", value: "#292132" },
+    { label: "Light Mode", value: "#ffffff" },
+  ];
+  // var markup = document.documentElement.innerHTML;
+  let subtitle;
+  const [setbgcolor, ddlvalue] = useState(colors.title);
+  const ddlHandle = (e) => {
+    ddlvalue(e.value);
+  };
+
   const handleChange = (e) => {
     if (e.key === "Backspace" || e.keyCode === 37 || e.keyCode === 39) {
       return;
@@ -93,7 +118,7 @@ function App() {
   };
 
   const crossBoard = (
-    <div className="cross-board">
+    <div className="cross-board" on>
       <div>
         <form id="cross" ref={input}>
           {Array.from({ length: length }, (_, k) => (
@@ -329,19 +354,19 @@ function App() {
     }
     for (let i = 0; i < wordString.length; ++i) {
       let currLetter = wordString.charAt(i);
-      if (wordMap[i] == "") {
-        if (tmpDict[currLetter] == 0) {
+      if (wordMap[i] === "") {
+        if (tmpDict[currLetter] === 0) {
           for (let j = 0; j < dictionary2[currLetter].length; ++j) {
             wordMap[dictionary2[currLetter][j]] = "grey";
             keyboard[currLetter] = "grey";
           }
-        } else if (dictionary2[currLetter].length == 1) {
+        } else if (dictionary2[currLetter].length === 1) {
           if (currLetter == answer.charAt(i)) {
             wordMap[i] = "#30c93b";
             keyboard[currLetter] = "#30c93b";
           } else {
             wordMap[i] = "#e1b137";
-            if (keyboard[currLetter] == "white") {
+            if (keyboard[currLetter] === "white") {
               keyboard[currLetter] = "#e1b137";
             }
           }
@@ -434,13 +459,30 @@ function App() {
     setLength(0);
     setGuesses([]);
     setCorrect(false);
+    setPlaying(false);
     setKeys({});
     setHashList([]);
     setWordHash({});
   };
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const selectLength = () => {
+    setWordArray();
+    randomWord();
+    filterWords();
+    setLength(tmpLength);
+    input.current.elements[0].focus();
+  };
+  function openModal() {
+    setIsOpen(true);
+  }
 
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <div className="App">
       <div className="circles">
@@ -467,6 +509,12 @@ function App() {
       </div>
 
       <div className="header">
+        <style>{"html {background-color:" + setbgcolor + ";}"}</style>
+        <Select
+          options={colors}
+          onChange={ddlHandle}
+          placeholder="Dark Mode"
+        ></Select>
         <div>
           <h1>You are playing Lingle!</h1>
         </div>
@@ -523,6 +571,7 @@ function App() {
             <h2>Select Lingle word length: </h2>
             <form>
               <input
+                autoFocus
                 className="numbox"
                 min={3}
                 type="number"
@@ -533,13 +582,7 @@ function App() {
                 className="button"
                 type="submit"
                 value="Submit"
-                onClick={(event) => {
-                  setWordArray();
-                  randomWord();
-                  filterWords();
-                  setLength(tmpLength);
-                  event.preventDefault();
-                }}
+                onClick={selectLength}
               />
             </form>
           </div>
@@ -549,54 +592,40 @@ function App() {
               Play now
             </button>
 
-            {/* <Button variant="primary" onClick={handleShow}>
-              Launch demo modal
-            </Button> */}
-
-            {/* <Modal
-              show={modalShow}
-              size="lg"
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
+            <button className="button" onClick={openModal}>
+              Info
+            </button>
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              style={customStyles}
+              contentLabel="Example Modal"
             >
-              <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                  Modal heading
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <h4>What is Lingle?</h4>
-                <p>
-                  Lingle is an adaptation to the New York Time's Wordle game. In
-                  wordle, you play with 5 letter words, and you can only play
-                  once a day. In Lingle, users can choose how many letters they
-                  want starting from 3 letters. There is
-                </p>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button onClick={(props) => {
-                  props.onHide();
-                  setModalShow(false);
-                }}>Close</Button>
-              </Modal.Footer>
-            </Modal> */}
+              <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+              <button onClick={closeModal}>close</button>
+              <div>I am a modal</div>
+              <form>
+                <input />
+                <button>tab navigation</button>
+                <button>stays</button>
+                <button>inside</button>
+                <button>the modal</button>
+              </form>
+            </Modal>
+            <div>
+              {/* <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton={true}>
+                  <Modal.Title>Modal</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Modal body content</Modal.Body>
+              </Modal> */}
+            </div>
           </div>
         )}
       </div>
-      {/* <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
+
+      <Modal show={show}></Modal>
     </div>
   );
 }
