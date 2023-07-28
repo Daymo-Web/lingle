@@ -254,7 +254,7 @@ const Game = () => {
       handleLeft(e);
     } else if (e.keyCode === 39) {
       handleRight(e);
-    } else if (e.key === 'Enter') {
+    } else if (e.key === 'Enter' || e.keyCode === 13) {
       handleChange(e);
       updateWord(e);
     }
@@ -351,14 +351,14 @@ const Game = () => {
               <div>{crossBoard}</div>
               {submitButton === true && debug === true ? (
                 <div>
-                  <button className="button" type="button" onClick={updateWord}>
+                  <button className="button" type="submit" onClick={updateWord}>
                     Enter
                   </button>
                   <h3>Not a valid word! Try Again!</h3>
                 </div>
               ) : (
                 submitButton === true && (
-                  <button className="button" type="button" onClick={updateWord}>
+                  <button className="button" type="submit" onClick={updateWord}>
                     Enter
                   </button>
                 )
