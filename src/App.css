@@ -83,6 +83,7 @@
   padding: 0;
   flex-direction: column;
   font-family: "nyt-karnak";
+  
 }
 
 
@@ -115,12 +116,12 @@ h3 {
   font-size: 48px;
   text-align: center;
   border: 1px solid black;
+  border-right: none;
 }
 
 .cross-board-input-right {
-  border-right: 1px solid black;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  
+  border: 1px solid black;
   width: 75px;
   height: 75px;
   font-size: 48px;
@@ -198,13 +199,15 @@ h3 {
     transform: rotate(360deg);
   }
 }
-/* body {
+html {
   display: flex;
   height: 100vh;
 
   align-items: center;
   justify-content: center;
-} */
+  background-color: lightblue;
+
+}
 
 .btn-liquid {
   display: inline-block;
